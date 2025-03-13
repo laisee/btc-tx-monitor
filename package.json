@@ -1,22 +1,25 @@
 {
-  "name": "abele_btcmonitor",
+  "name": "btcmonitor",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.19.2",
-    "npm-update": "^3.0.1",
-    "qs": "^6.12.1",
-    "redis": "^3.1.1",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "npm-update": "^1.0.8",
+    "qs": "^6.14.0",
+    "redis": "^4.7.0",
     "request": "^2.88.2",
-    "request-promise": "^0.0.1",
-    "tough-cookie": "^4.1.4",
-    "uuid": "^9.0.1"
+    "request-promise": "^4.2.6",
+    "tough-cookie": "^5.1.2",
+    "uuid": "^11.1.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
+  "devDependencies": {
+    "mocha": "^11.1.0"
+  },
   "license": "ISC"
 }
