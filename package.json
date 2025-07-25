@@ -6,11 +6,9 @@
   "dependencies": {
     "body-parser": "^1.20.3",
     "express": "^4.21.2",
-    "npm-update": "^1.0.8",
+    "axios": "^1.8.3",
     "qs": "^6.14.0",
     "redis": "^4.7.0",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6",
     "tough-cookie": "^5.1.2",
     "uuid": "^11.1.0"
   },
