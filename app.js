@@ -1,7 +1,7 @@
 var bodyParser    = require('body-parser');
 var express 	  = require('express');
 var redis         = require('redis');
-var rp            = require('request-promise');
+var axios         = require('axios');
 
 var app           = express()
 //var client      = redis.createClient(process.env.REDISCLOUD_URL, {no_ready_check: true});
@@ -29,18 +29,16 @@ app.get('/', function(req, res) {
 //
 app.post('/transaction/update', function(req, res) {
     const url = "https://blockchain.info/address/" + BTC_ADDR + "?format=json";
-    var options = {
-       uri: url,
-       json: true
-    };
-    rp(options).then(function(body) {
+    axios.get(url)
+    .then(function(response) {
+        const body = response.data;
         const txn  = body.result[0];
         const ts = +new Date()
         const sender = body.result[0].from;
-        res.json({"sender": sender, "txn": txn, "timestamp": ts, "count": body.result.length}); 	
+        res.json({"sender": sender, "txn": txn, "timestamp": ts, "count": body.result.length});
     })
     .catch(function (err) {
-        res.status(500);
+        res.status(500).send('Error fetching transaction data');
     });
 });
 
@@ -48,18 +46,16 @@ app.post('/transaction/update', function(req, res) {
 // Retrieve total transactions sent to BTC address
 //
 app.get('/transaction/total', function(req, res) {
-    const uri = "https://blockchain.info/balance/" + BTC_ADDR + "?format=json";
-    var options = { 
-       uri: url,
-       json: true
-    };
-    rp(options).then(function(body) {
+    const url = "https://blockchain.info/balance/" + BTC_ADDR + "?format=json";
+    axios.get(url)
+    .then(function(response) {
+        const body = response.data;
         const total = body.result;
         const ts = +new Date()
         res.json({"currency": "BTC","total": total, "timestamp": ts});
     })
     .catch(function (err) {
-        res.status(500);
+        res.status(500).send('Error fetching balance data');
     });
 });
 
